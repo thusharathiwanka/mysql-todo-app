@@ -1,7 +1,8 @@
 const express = require("express");
-const mysql = require("mysql");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const db = require("./api/config/db.config");
+const todoRoutes = require("./api/routes/todo.routes");
 
 const app = express();
 dotenv.config();
@@ -12,12 +13,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const db = mysql.createConnection({
-	host: "localhost",
-	user: "root",
-	password: "",
-	database: "todo-app",
-});
+app.use("/todos", todoRoutes);
 
 db.connect((err) => {
 	if (err) {
