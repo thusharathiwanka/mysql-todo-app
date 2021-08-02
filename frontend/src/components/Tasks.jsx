@@ -1,14 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Task from "./Task";
+import { ReloadContext } from "../context/Context";
 
 const Tasks = () => {
+	const { reload, setReload } = useContext(ReloadContext);
 	const [todos, setTodos] = useState([]);
-	const [isCompleted, setIsCompleted] = useState([]);
 
 	useEffect(() => {
 		getTodos();
-	}, [setTodos]);
+		setReload(false);
+	}, [setTodos, reload, setReload]);
 
 	const getTodos = async () => {
 		try {
@@ -31,6 +33,7 @@ const Tasks = () => {
 	const updateTask = async (id) => {
 		try {
 			await axios.put(`/${id}`);
+			setReload(true);
 		} catch (err) {
 			console.log(err.message);
 		}
