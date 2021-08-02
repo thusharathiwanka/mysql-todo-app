@@ -4,6 +4,7 @@ import Task from "./Task";
 
 const Tasks = () => {
 	const [todos, setTodos] = useState([]);
+	const [isCompleted, setIsCompleted] = useState([]);
 
 	useEffect(() => {
 		getTodos();

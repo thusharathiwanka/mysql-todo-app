@@ -9,6 +9,7 @@ const Form = () => {
 
 		try {
 			await axios.post("/", todo);
+			setTodo({ task: "" });
 		} catch (err) {
 			console.log(err.message);
 		}

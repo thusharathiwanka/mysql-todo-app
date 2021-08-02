@@ -4,10 +4,17 @@ const Task = ({ todo, updateTask, deleteTask }) => {
 	return (
 		<div className="task">
 			<div className="task-text">
-				<h3>{todo.task}</h3>
+				<h3 className={todo.isCompleted && "completed"}>{todo.task}</h3>
 			</div>
 			<div className="actions">
-				<FaCheck onClick={() => updateTask(todo.id)} />
+				{!todo.isCompleted && (
+					<FaCheck
+						style={{
+							cursor: "pointer",
+						}}
+						onClick={() => updateTask(todo.id)}
+					/>
+				)}
 				<FaTimes
 					style={{
 						cursor: "pointer",

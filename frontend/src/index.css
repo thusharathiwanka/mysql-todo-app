@@ -105,3 +105,7 @@ button {
 	text-align: center;
 	padding-top: 4rem;
 }
+
+.completed {
+	text-decoration: line-through;
+}
