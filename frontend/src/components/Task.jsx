@@ -1,16 +1,21 @@
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaCheck } from "react-icons/fa";
 
-const Task = () => {
+const Task = ({ todo, updateTask, deleteTask }) => {
 	return (
 		<div className="task">
 			<div className="task-text">
-				<h3>Task</h3>
+				<h3>{todo.task}</h3>
 			</div>
-			<FaTimes
-				style={{
-					cursor: "pointer",
-				}}
-			/>
+			<div className="actions">
+				<FaCheck onClick={() => updateTask(todo.id)} />
+				<FaTimes
+					style={{
+						cursor: "pointer",
+						marginLeft: "1rem",
+					}}
+					onClick={() => deleteTask(todo.id)}
+				/>
+			</div>
 		</div>
 	);
 };

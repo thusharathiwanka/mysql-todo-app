@@ -1,14 +1,19 @@
 const db = require("../config/db.config");
 
 const saveTodo = (req, res) => {
-	const todo = req.body.todo;
+	const task = req.body.task;
+	const isCompleted = req.body.isCompleted;
 
-	db.query("INSERT INTO todos (todo) VALUES(?)", [todo], (err, result) => {
-		if (err) {
-			return res.status(406).json({ message: err.message });
+	db.query(
+		"INSERT INTO todos (task, isCompleted) VALUES(?, ?)",
+		[task, isCompleted],
+		(err, result) => {
+			if (err) {
+				return res.status(406).json({ message: err.message });
+			}
+			return res.status(201).json({ id: result.insertId });
 		}
-		return res.status(201).json({ id: result.insertId });
-	});
+	);
 };
 
 const getTodos = (req, res) => {
@@ -21,12 +26,11 @@ const getTodos = (req, res) => {
 };
 
 const updateTodo = (req, res) => {
-	const updatedTodo = req.body.updatedTodo;
 	const id = req.params.id;
 
 	db.query(
-		"UPDATE todos SET todo=? WHERE id=?",
-		[updatedTodo, id],
+		"UPDATE todos SET isCompleted=true WHERE id=?",
+		[id],
 		(err, result) => {
 			if (err) {
 				return res.status(406).json({ message: err.message });

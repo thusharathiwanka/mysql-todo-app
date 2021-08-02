@@ -22,11 +22,11 @@ db.connect((err) => {
 		return;
 	}
 
+	app.get("/", (req, res) => {
+		res.send("MYSQL TODO API");
+	});
+
 	app.listen(PORT, () => {
 		console.log(`database connected and listening on port ${PORT}`);
 	});
-});
-
-app.get("/", (req, res) => {
-	res.send("MYSQL TODO API");
 });
