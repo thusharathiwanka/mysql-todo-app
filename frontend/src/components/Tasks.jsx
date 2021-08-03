@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Task from "./Task";
+
 import { ReloadContext } from "../context/Context";
 
 const Tasks = () => {
@@ -43,12 +44,14 @@ const Tasks = () => {
 		<div className="task-container">
 			{todos.map((todo) => {
 				return (
-					<Task
-						todo={todo}
-						deleteTask={deleteTask}
-						updateTask={updateTask}
-						key={todo.id}
-					/>
+					<>
+						<Task
+							todo={todo}
+							deleteTask={deleteTask}
+							updateTask={updateTask}
+							key={todo.id}
+						/>
+					</>
 				);
 			})}
 		</div>
